@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
-require("../styles/modal.css");
+require("./modal.css");
 const Modal = _ref => {
   let {
     message,
