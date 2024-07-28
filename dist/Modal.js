@@ -10,15 +10,29 @@ require("./modal.css");
 const Modal = _ref => {
   let {
     message,
-    onClose
+    onClose,
+    showCloseButton = false,
+    backgroundColor = "#fff"
   } = _ref;
+  const handleOverlayClick = e => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "modal-overlay"
+    className: "modal-overlay",
+    onClick: handleOverlayClick
   }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "modal-content"
+    className: "modal-content",
+    style: {
+      backgroundColor
+    }
   }, /*#__PURE__*/_react.default.createElement("span", {
     className: "close-button",
     onClick: onClose
-  }, "\xD7"), /*#__PURE__*/_react.default.createElement("p", null, message)));
+  }, "\xD7"), /*#__PURE__*/_react.default.createElement("p", null, message), showCloseButton && /*#__PURE__*/_react.default.createElement("button", {
+    className: "close-modal-button",
+    onClick: onClose
+  }, "Close")));
 };
 var _default = exports.default = Modal;
