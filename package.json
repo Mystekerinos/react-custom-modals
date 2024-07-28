@@ -1,6 +1,6 @@
 {
   "name": "react-custom-modals",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A collection of reusable React components designed to streamline frontend development. Includes modal dialogs, form inputs, and responsive layout components. Ideal for developers looking to enhance user interfaces with minimal setup and maximum customization options.",
   "main": "dist/index.js",
   "module": "dist/index.js",
