@@ -1,33 +1,53 @@
-import React from "react";
-import "./modal.css";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import "./Modal.css";
 
 const Modal = ({
   message,
   onClose,
-  showCloseButton = false,
-  backgroundColor = "#fff",
+  showCloseButton,
+  backgroundColor,
+  closeOnOutsideClick,
 }) => {
-  const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (closeOnOutsideClick && event.target.className === "modal") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      window.removeEventListener("click", handleOutsideClick);
+    };
+  }, [closeOnOutsideClick, onClose]);
 
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-content" style={{ backgroundColor }}>
-        <span className="close-button" onClick={onClose}>
-          &times;
-        </span>
+    <div
+      className="modal"
+      style={{ backgroundColor: backgroundColor || "#fff" }}
+    >
+      <div className="modal-content">
         <p>{message}</p>
-        {showCloseButton && (
-          <button className="close-modal-button" onClick={onClose}>
-            Close
-          </button>
-        )}
+        {showCloseButton && <button onClick={onClose}>Close</button>}
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  message: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+  showCloseButton: PropTypes.bool,
+  backgroundColor: PropTypes.string,
+  closeOnOutsideClick: PropTypes.bool,
+};
+
+Modal.defaultProps = {
+  showCloseButton: false,
+  backgroundColor: "#fff",
+  closeOnOutsideClick: false,
 };
 
 export default Modal;
