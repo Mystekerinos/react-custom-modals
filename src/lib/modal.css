@@ -14,7 +14,6 @@
 
 .modal-content {
     background: #fff;
-    /* This will be overridden by the backgroundColor prop */
     padding: 20px;
     border-radius: 10px;
     position: relative;
